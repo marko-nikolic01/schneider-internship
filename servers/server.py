@@ -44,7 +44,7 @@ def calculate_next(num1, num2, operation):
     return result
 
 def save_to_file(data: bytes, result: float, address):
-    with open("servers/data/expressions.txt", "a") as file:
+    with open("servers/data/requests.txt", "a") as file:
         new_entry = f"{data.decode()},{result},{address}\n"
         file.write(new_entry)
 
