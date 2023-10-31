@@ -42,7 +42,11 @@ def calculate_next(num1, num2, operation):
         result = float(data.decode())
     
     return result
-        
+
+def save_to_file(data: bytes, result: float, address):
+    with open("servers/data/expressions.txt", "a") as file:
+        new_entry = f"{data.decode()},{result},{address}\n"
+        file.write(new_entry)
 
 def server_loop():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
@@ -71,6 +75,8 @@ def server_loop():
                     result = calculate_next(result, num, operation)
                 
                 connection.sendall(bytes(str(result).encode()))
+
+                save_to_file(data, result, address)
 
 
 while True:
